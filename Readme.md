@@ -1,8 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Aleksandr Malinin](https://up.htmlacademy.ru/ecmascript/4/user/321121).
-* Наставник: `Неизвестно`.
-
+* Наставник: [Никита Ткачук](https://up.htmlacademy.ru/ecmascript/4/user/450211).
 ---
 
 _Не удаляйте и не изменяйте папки и файлы:_
