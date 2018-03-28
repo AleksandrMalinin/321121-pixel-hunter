@@ -1,11 +1,20 @@
-const arrowLeftKey = 37;
-const arrowRightKey = 39;
+const constants = {
+  arrowLeftKey: 37,
+  arrowRightKey: 39,
+};
+
 const screen = document.querySelector(`.central`);
-const template = document.querySelectorAll(`template`);
+const greeting = document.getElementById(`greeting`);
+const rules = document.getElementById(`rules`);
+const gameFirst = document.getElementById(`game-1`);
+const gameSecond = document.getElementById(`game-2`);
+const gameThird = document.getElementById(`game-3`);
+const stats = document.getElementById(`stats`);
+
 let currentScreen = 0;
 
-// приведение темплэйта к массиву
-const screens = Array.from(template);
+// запись экранов в массив
+const screens = [greeting, rules, gameFirst, gameSecond, gameThird, stats];
 
 // получение клонированного содержимого темплэйта
 const getTemplate = (array, number) => array[number].content.cloneNode(true);
@@ -14,16 +23,15 @@ const getTemplate = (array, number) => array[number].content.cloneNode(true);
 const changeScreen = (number) => {
   screen.innerHTML = ``;
   screen.appendChild(getTemplate(screens, number));
-  return screen;
 };
 
 // экран приветствия
 changeScreen(currentScreen);
 
 document.addEventListener(`keydown`, (evt) => {
-  if (evt.altKey && evt.keyCode === arrowRightKey && currentScreen < screens.length - 1) {
+  if (evt.altKey && evt.keyCode === constants.arrowRightKey && currentScreen < screens.length - 1) {
     currentScreen++;
-  } else if (evt.altKey && evt.keyCode === arrowLeftKey && currentScreen > 0) {
+  } else if (evt.altKey && evt.keyCode === constants.arrowLeftKey && currentScreen > 0) {
     currentScreen--;
   }
   return changeScreen(currentScreen);
