@@ -47,11 +47,7 @@ const rulesForm = rulesDomElement.querySelector(`.rules__form`);
 
 // имя не может состоять < чем из двух символов
 rulesInput.oninput = () => {
-  if (rulesInput.value.length < 2) {
-    rulesButton.disabled = true;
-  } else {
-    rulesButton.disabled = false;
-  }
+  rulesButton.disabled = rulesInput.value.length < 2 ? true : false;
 };
 
 rulesButton.onclick = (evt) => {

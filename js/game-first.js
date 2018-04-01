@@ -84,11 +84,11 @@ gameAnswer.forEach(function (element) {
       if (item.checked === true) {
         checked.push(item);
       }
+    }
 
-      if (checked.length === 2) {
-        changeScreen(gameSecondDomElement);
-        formGameFirst.reset();
-      }
+    if (checked.length === 2) {
+      changeScreen(gameSecondDomElement);
+      formGameFirst.reset();
     }
   });
 });
