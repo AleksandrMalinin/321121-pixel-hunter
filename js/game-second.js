@@ -2,7 +2,6 @@ import getElementFromTemplate from './util';
 import changeScreen from './change-screen';
 import gameThirdDomElement from './game-third';
 import greetingDomElement from "./greeting";
-import gameFirstDomElement from "./game-first";
 
 const gameSecondTemplate = `<header class="header">
     <div class="header__back">

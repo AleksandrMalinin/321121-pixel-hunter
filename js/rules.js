@@ -62,7 +62,6 @@ rulesButton.onclick = (evt) => {
 
 backButton.onclick = () => {
   changeScreen(greetingDomElement);
-}
-
+};
 
 export default rulesDomElement;
