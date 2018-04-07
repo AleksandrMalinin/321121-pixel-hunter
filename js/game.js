@@ -1,28 +1,29 @@
-const INITIAL_GAME = {
+export const INITIAL_GAME = {
   answer: true,
   time: 15
 };
 
 export const LIVES = 3;
 
-export const answersArray = Array(10).fill(INITIAL_GAME);
-
 export const countPoints = (array, number) => {
   if (number < 0) {
     throw new Error(`Value should not be negative number`);
   }
+
+  if (number === 0) {
+    return -1;
+  }
+
   let points = 0;
+
   for (let i = 0; i < array.length; i++) {
-    if (number === 0) {
-      return -1;
-    }
     if (array[i].answer) {
       points += 100;
     } else {
       number--;
     }
     // быстрый ответ
-    if (array[i].time < 10) {
+    if (array[i].time < 10 && array[i].answer) {
       points += 50;
     }
 
