@@ -3,6 +3,8 @@ import changeScreen from './change-screen';
 import gameFirstDomElement from './game-first';
 import greetingDomElement from './greeting';
 
+const MIN_LENGTH = 2;
+
 const rulesTemplate = `<header class="header">
     <div class="header__back">
       <button class="back">
@@ -47,7 +49,7 @@ const rulesForm = rulesDomElement.querySelector(`.rules__form`);
 
 // имя не может состоять < чем из двух символов
 rulesInput.oninput = () => {
-  rulesButton.disabled = rulesInput.value.length < 2 ? true : false;
+  rulesButton.disabled = rulesInput.value.length < MIN_LENGTH ? true : false;
 };
 
 rulesButton.onclick = (evt) => {

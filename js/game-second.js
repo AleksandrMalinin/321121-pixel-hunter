@@ -68,7 +68,7 @@ gameAnswerGameSecond.forEach(function (element) {
   element.addEventListener(`click`, () => {
 
     for (let item of radioGameSecond) {
-      if (item.checked === true) {
+      if (item.checked) {
         changeScreen(gameThirdDomElement);
         formGameSecond.reset();
       }

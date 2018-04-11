@@ -3,6 +3,8 @@ import changeScreen from './change-screen';
 import gameSecondDomElement from './game-second';
 import greetingDomElement from './greeting';
 
+const CHECKED_RADIO_COUNT = 2;
+
 const gameFirstTemplate = `<header class="header">
     <div class="header__back">
       <button class="back">
@@ -79,14 +81,14 @@ gameAnswer.forEach(function (element) {
   element.addEventListener(`click`, () => {
     let checked = [];
 
-    for (let item of radio) {
+    for (const item of radio) {
       // запись чекнутого элемента в массив
-      if (item.checked === true) {
+      if (item.checked) {
         checked.push(item);
       }
     }
 
-    if (checked.length === 2) {
+    if (checked.length === CHECKED_RADIO_COUNT) {
       changeScreen(gameSecondDomElement);
       formGameFirst.reset();
     }

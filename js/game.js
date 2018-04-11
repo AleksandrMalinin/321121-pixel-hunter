@@ -1,9 +1,13 @@
+const CORRECT_ANSWER = 100;
+const ADDITIONAL_POINTS = 50;
+const LOWER_TIME_LIMIT = 10;
+const HIGHER_TIME_LIMIT = 20;
+
+export const LIVES = 3;
 export const INITIAL_GAME = {
   answer: true,
   time: 15
 };
-
-export const LIVES = 3;
 
 export const countPoints = (array, number) => {
   if (number < 0) {
@@ -18,21 +22,19 @@ export const countPoints = (array, number) => {
 
   for (let i = 0; i < array.length; i++) {
     if (array[i].answer) {
-      points += 100;
-    } else {
-      number--;
+      points += CORRECT_ANSWER;
     }
     // быстрый ответ
-    if (array[i].time < 10 && array[i].answer) {
-      points += 50;
+    if (array[i].time < LOWER_TIME_LIMIT && array[i].answer) {
+      points += ADDITIONAL_POINTS;
     }
 
     // медленный ответ
-    if (array[i].time > 20) {
-      points -= 50;
+    if (array[i].time > HIGHER_TIME_LIMIT) {
+      points -= ADDITIONAL_POINTS;
     }
   }
-  points += number * 50;
+  points += number * ADDITIONAL_POINTS;
   return points;
 };
 
