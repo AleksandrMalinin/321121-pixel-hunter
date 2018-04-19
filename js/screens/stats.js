@@ -1,5 +1,5 @@
-import getElementFromTemplate from './util';
-import changeScreen from './change-screen';
+import getElementFromTemplate from '../util';
+import changeScreen from '../logic/change-screen';
 import greetingDomElement from "./greeting";
 
 const statsTemplate = `<header class="header">
@@ -122,10 +122,10 @@ const statsTemplate = `<header class="header">
   </footer>`;
 
 const statsDomElement = getElementFromTemplate(statsTemplate);
-const backButton = statsDomElement.querySelector(`.back`);
+// const backButton = statsDomElement.querySelector(`.back`);
 
-backButton.onclick = () => {
-  changeScreen(greetingDomElement);
-};
+// backButton.onclick = () => {
+//   changeScreen(greetingDomElement);
+// };
 
 export default statsDomElement;

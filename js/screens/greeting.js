@@ -1,5 +1,5 @@
-import getElementFromTemplate from './util';
-import changeScreen from './change-screen';
+import getElementFromTemplate from '../util';
+import changeScreen from '../logic/change-screen';
 import rulesDomElement from './rules';
 
 const greetingTemplate = `<div class="greeting central--blur">

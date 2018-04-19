@@ -1,7 +1,9 @@
-import getElementFromTemplate from './util';
-import changeScreen from './change-screen';
+import getElementFromTemplate from '../util';
+import changeScreen from '../logic/change-screen';
 import gameFirstDomElement from './game-first';
 import greetingDomElement from './greeting';
+import {renderScreen} from "../logic/game";
+import {templates} from "../data/game-data";
 
 const MIN_LENGTH = 2;
 
@@ -44,7 +46,7 @@ const rulesDomElement = getElementFromTemplate(rulesTemplate);
 
 const rulesInput = rulesDomElement.querySelector(`.rules__input`);
 const rulesButton = rulesDomElement.querySelector(`.rules__button`);
-const backButton = rulesDomElement.querySelector(`.back`);
+// const backButton = rulesDomElement.querySelector(`.back`);
 const rulesForm = rulesDomElement.querySelector(`.rules__form`);
 
 // имя не может состоять < чем из двух символов
@@ -54,12 +56,12 @@ rulesInput.oninput = () => {
 
 rulesButton.onclick = (evt) => {
   evt.preventDefault();
-  changeScreen(gameFirstDomElement);
+  renderScreen(templates[0]);
   rulesForm.reset();
 };
 
-backButton.onclick = () => {
-  changeScreen(greetingDomElement);
-};
+// backButton.onclick = () => {
+//   changeScreen(greetingDomElement);
+// };
 
 export default rulesDomElement;

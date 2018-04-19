@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {countPoints, CountTime, LIVES, timer, INITIAL_GAME} from './game';
+import {countPoints, CountTime, LIVES, timer, INITIAL_GAME} from './game-statistic';
 
 describe(`Check answers count`, () => {
   const slowAnswer = {
