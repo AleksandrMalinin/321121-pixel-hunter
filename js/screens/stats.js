@@ -1,6 +1,8 @@
 import getElementFromTemplate from '../util';
 import changeScreen from '../logic/change-screen';
 import greetingDomElement from "./greeting";
+import gameState from "../logic/game-state";
+import getResultTemplate from "../logic/result";
 
 const statsTemplate = `<header class="header">
     <div class="header__back">
@@ -16,18 +18,19 @@ const statsTemplate = `<header class="header">
       <tr>
         <td class="result__number">1.</td>
         <td colspan="2">
-          <ul class="stats">
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--correct"></li>
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--unknown"></li>
-          </ul>
+          ${getResultTemplate(gameState.answers)}
+          <!--<ul class="stats">-->
+            <!--<li class="stats__result stats__result&#45;&#45;wrong"></li>-->
+            <!--<li class="stats__result stats__result&#45;&#45;slow"></li>-->
+            <!--<li class="stats__result stats__result&#45;&#45;fast"></li>-->
+            <!--<li class="stats__result stats__result&#45;&#45;correct"></li>-->
+            <!--<li class="stats__result stats__result&#45;&#45;wrong"></li>-->
+            <!--<li class="stats__result stats__result&#45;&#45;unknown"></li>-->
+            <!--<li class="stats__result stats__result&#45;&#45;slow"></li>-->
+            <!--<li class="stats__result stats__result&#45;&#45;unknown"></li>-->
+            <!--<li class="stats__result stats__result&#45;&#45;fast"></li>-->
+            <!--<li class="stats__result stats__result&#45;&#45;unknown"></li>-->
+          <!--</ul>-->
         </td>
         <td class="result__points">×&nbsp;100</td>
         <td class="result__total">900</td>
@@ -129,3 +132,5 @@ const statsDomElement = getElementFromTemplate(statsTemplate);
 // };
 
 export default statsDomElement;
+
+console.log(gameState.answers);

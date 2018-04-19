@@ -6,6 +6,7 @@ import statsDomElement from "../screens/stats";
 import {GameType} from "../data/game-data";
 import headerTemplate from "../screens/header";
 import getResultTemplate from "./result";
+import greetingDomElement from "../screens/greeting";
 
 const CHECKED_RADIO_COUNT = 2;
 
@@ -22,6 +23,7 @@ export const renderScreen = (template) => {
   const form = gameScreen.querySelector(`.game__content`);
   const gameAnswer = form.querySelectorAll(`.game__answer`);
   const radio = form.querySelectorAll(`[type=radio]`);
+  const backButton = gameScreen.querySelector(`.back`);
 
   if (gameState.answers.length < 10) {
     if (gameState.lives === 0) {
@@ -92,4 +94,9 @@ export const renderScreen = (template) => {
     gameState.win = answerWrong > 3 ? false : true;
     changeScreen(statsDomElement);
   }
+
+  backButton.onclick = () => {
+    form.reset();
+    changeScreen(greetingDomElement);
+  };
 };

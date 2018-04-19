@@ -46,7 +46,7 @@ const rulesDomElement = getElementFromTemplate(rulesTemplate);
 
 const rulesInput = rulesDomElement.querySelector(`.rules__input`);
 const rulesButton = rulesDomElement.querySelector(`.rules__button`);
-// const backButton = rulesDomElement.querySelector(`.back`);
+const backButton = rulesDomElement.querySelector(`.back`);
 const rulesForm = rulesDomElement.querySelector(`.rules__form`);
 
 // имя не может состоять < чем из двух символов
@@ -60,8 +60,8 @@ rulesButton.onclick = (evt) => {
   rulesForm.reset();
 };
 
-// backButton.onclick = () => {
-//   changeScreen(greetingDomElement);
-// };
+backButton.onclick = () => {
+  changeScreen(greetingDomElement);
+};
 
 export default rulesDomElement;

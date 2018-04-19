@@ -1,5 +1,3 @@
-import gameState from "./game-state";
-
 const getAnswerType = (answer) => {
   let answerType = ``;
   if (answer.correct) {
