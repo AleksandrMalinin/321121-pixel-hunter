@@ -54,7 +54,7 @@ export const renderScreen = (template) => {
       form.addEventListener(`click`, (evt) => {
         let target = evt.target;
         if (target.children[0].src === GameType.third.answer.answer1) {
-          gameState.answers.push({correct: true, time: 15});
+          gameState.answers.push({correct: true, time: 22});
         } else {
           gameState.lives--;
           gameState.answers.push({correct: false, time: 15});
@@ -76,7 +76,7 @@ export const renderScreen = (template) => {
 
           if (checked.length === CHECKED_RADIO_COUNT) {
             if (checked[0].value === GameType.first.answer.answer1 && checked[1].value === GameType.first.answer.answer2) {
-              gameState.answers.push({correct: true, time: 15});
+              gameState.answers.push({correct: true, time: 8});
             } else {
               gameState.lives--;
               gameState.answers.push({correct: false, time: 15});
