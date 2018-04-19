@@ -2,7 +2,7 @@ import getElementFromTemplate from '../util';
 // import changeScreen from '../logic/change-screen';
 // import greetingDomElement from "./greeting";
 import gameState from "../logic/game-state";
-import getResultTemplate from "../logic/result";
+import getResultTemplate from "./statistic";
 
 const statsTemplate = `<header class="header">
     <div class="header__back">

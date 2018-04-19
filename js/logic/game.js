@@ -2,10 +2,10 @@ import getElementFromTemplate from "../util";
 import {templates} from "../data/game-data";
 import gameState from "./game-state";
 import changeScreen from "./change-screen";
-import statsDomElement from "../screens/stats";
+import statsDomElement from "../screens/game-results";
 import {GameType} from "../data/game-data";
 import headerTemplate from "../screens/header";
-import getResultTemplate from "./result";
+import getResultTemplate from "../screens/statistic";
 import greetingDomElement from "../screens/greeting";
 
 const CHECKED_RADIO_COUNT = 2;

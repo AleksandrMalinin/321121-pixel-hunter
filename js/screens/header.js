@@ -1,7 +1,3 @@
-import gameState from '../logic/game-state';
-import changeScreen from "../logic/change-screen";
-import greetingDomElement from "./greeting";
-
 const headerTemplate = (state) => {
   return `
   <header class="header">
