@@ -1,6 +1,6 @@
 import getElementFromTemplate from '../util';
-import changeScreen from '../logic/change-screen';
-import greetingDomElement from "./greeting";
+// import changeScreen from '../logic/change-screen';
+// import greetingDomElement from "./greeting";
 import gameState from "../logic/game-state";
 import getResultTemplate from "../logic/result";
 
@@ -132,5 +132,3 @@ const statsDomElement = getElementFromTemplate(statsTemplate);
 // };
 
 export default statsDomElement;
-
-console.log(gameState.answers);
