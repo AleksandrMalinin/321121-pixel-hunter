@@ -1,6 +1,5 @@
 import getElementFromTemplate from '../util';
 import changeScreen from '../logic/change-screen';
-import gameFirstDomElement from './game-first';
 import greetingDomElement from './greeting';
 import {renderScreen} from "../logic/game";
 import {templates} from "../data/game-data";
