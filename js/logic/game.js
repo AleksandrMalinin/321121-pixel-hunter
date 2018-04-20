@@ -2,7 +2,7 @@ import getElementFromTemplate from "../util";
 import {templates} from "../data/game-data";
 import gameState from "./game-state";
 import changeScreen from "./change-screen";
-import statsDomElement from "../screens/game-results";
+import statsTemplate from "../screens/game-results";
 import {GameType} from "../data/game-data";
 import headerTemplate from "../screens/header";
 import getResultTemplate from "../screens/statistic";
@@ -23,11 +23,12 @@ export const renderScreen = (template) => {
   const form = gameScreen.querySelector(`.game__content`);
   const gameAnswer = form.querySelectorAll(`.game__answer`);
   const radio = form.querySelectorAll(`[type=radio]`);
-  const backButton = gameScreen.querySelector(`.back`);
+  const backButton = document.querySelector(`.back`);
 
   if (gameState.answers.length < 10) {
     if (gameState.lives === 0) {
-      changeScreen(statsDomElement);
+      gameState.win = false;
+      changeScreen(getElementFromTemplate(statsTemplate(gameState)));
     }
 
     if (form.classList.contains(`game__content--wide`)) {
@@ -91,8 +92,8 @@ export const renderScreen = (template) => {
     const answerWrong = gameState.answers.filter((answer) => {
       return answer.correct === false;
     });
-    gameState.win = answerWrong > 3 ? false : true;
-    changeScreen(statsDomElement);
+    gameState.win = answerWrong < 3 ? true : false;
+    changeScreen(getElementFromTemplate(statsTemplate(gameState)));
   }
 
   backButton.onclick = () => {
