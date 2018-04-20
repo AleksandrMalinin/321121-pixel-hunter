@@ -1,8 +1,9 @@
-import getElementFromTemplate from './util';
-import changeScreen from './change-screen';
-import greetingDomElement from "./greeting";
+import getResultTemplate from "./statistic";
+import {ADDITIONAL_POINTS, CORRECT_ANSWER, countPoints, getAnswersQuantity} from "../logic/game-statistic";
 
-const statsTemplate = `<header class="header">
+const statsTemplate = (state) => {
+  return `
+  <header class="header">
     <div class="header__back">
       <button class="back">
         <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
@@ -11,50 +12,39 @@ const statsTemplate = `<header class="header">
     </div>
   </header>
   <div class="result">
-    <h1>Победа!</h1>
+    <h1>${state.win === true ? `Победа! 💁‍♂️` : `Поражение! 🤦‍`}</h1>
     <table class="result__table">
       <tr>
         <td class="result__number">1.</td>
         <td colspan="2">
-          <ul class="stats">
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--correct"></li>
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--unknown"></li>
-          </ul>
+          ${getResultTemplate(state.answers)}
         </td>
         <td class="result__points">×&nbsp;100</td>
-        <td class="result__total">900</td>
+        <td class="result__total">${getAnswersQuantity(state).correct * CORRECT_ANSWER}</td>
       </tr>
       <tr>
         <td></td>
         <td class="result__extra">Бонус за скорость:</td>
-        <td class="result__extra">1&nbsp;<span class="stats__result stats__result--fast"></span></td>
+        <td class="result__extra">${getAnswersQuantity(state).fast}&nbsp;<span class="stats__result stats__result--fast"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">50</td>
+        <td class="result__total">${getAnswersQuantity(state).fast * ADDITIONAL_POINTS}</td>
       </tr>
       <tr>
         <td></td>
         <td class="result__extra">Бонус за жизни:</td>
-        <td class="result__extra">2&nbsp;<span class="stats__result stats__result--alive"></span></td>
+        <td class="result__extra">${getAnswersQuantity(state).lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">100</td>
+        <td class="result__total">${getAnswersQuantity(state).lives * ADDITIONAL_POINTS}</td>
       </tr>
       <tr>
         <td></td>
         <td class="result__extra">Штраф за медлительность:</td>
-        <td class="result__extra">2&nbsp;<span class="stats__result stats__result--slow"></span></td>
+        <td class="result__extra">${getAnswersQuantity(state).lives}&nbsp;<span class="stats__result stats__result--slow"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">-100</td>
+        <td class="result__total">${getAnswersQuantity(state).slow * -ADDITIONAL_POINTS}</td>
       </tr>
       <tr>
-        <td colspan="5" class="result__total  result__total--final">950</td>
+        <td colspan="5" class="result__total  result__total--final">${countPoints(getAnswersQuantity(state))}</td>
       </tr>
     </table>
     <table class="result__table">
@@ -120,12 +110,6 @@ const statsTemplate = `<header class="header">
       <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
     </div>
   </footer>`;
-
-const statsDomElement = getElementFromTemplate(statsTemplate);
-const backButton = statsDomElement.querySelector(`.back`);
-
-backButton.onclick = () => {
-  changeScreen(greetingDomElement);
 };
 
-export default statsDomElement;
+export default statsTemplate;

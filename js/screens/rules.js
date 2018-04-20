@@ -1,7 +1,10 @@
-import getElementFromTemplate from './util';
-import changeScreen from './change-screen';
-import gameFirstDomElement from './game-first';
+import getElementFromTemplate from '../util';
+import changeScreen from '../logic/change-screen';
 import greetingDomElement from './greeting';
+import {renderScreen} from "../logic/game";
+import {templates} from "../data/game-data";
+
+const MIN_LENGTH = 2;
 
 const rulesTemplate = `<header class="header">
     <div class="header__back">
@@ -47,12 +50,12 @@ const rulesForm = rulesDomElement.querySelector(`.rules__form`);
 
 // имя не может состоять < чем из двух символов
 rulesInput.oninput = () => {
-  rulesButton.disabled = rulesInput.value.length < 2 ? true : false;
+  rulesButton.disabled = rulesInput.value.length < MIN_LENGTH ? true : false;
 };
 
 rulesButton.onclick = (evt) => {
   evt.preventDefault();
-  changeScreen(gameFirstDomElement);
+  renderScreen(templates[0]);
   rulesForm.reset();
 };
 
