@@ -1,10 +1,5 @@
-const initialState = {
-  answers: [],
-  lives: 3,
-  time: 15,
-  win: true
-};
+import constants from "../constants";
 
-const gameState = Object.assign(initialState);
+const gameState = Object.assign(constants.INITIAL_STATE);
 
 export default gameState;

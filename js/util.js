@@ -1,8 +1,13 @@
 // функция, возвращающая DOM элемент
-const getElementFromTemplate = (markup) => {
+export const getElementFromTemplate = (markup) => {
   let domElement = document.createElement(`div`);
   domElement.innerHTML = markup;
   return domElement;
 };
 
-export default getElementFromTemplate;
+// генератор случайного числа
+const getRandomNumber = (minValue, maxValue) => {
+  return Math.round(Math.random() * (maxValue - minValue) + minValue);
+};
+
+export default getRandomNumber;
