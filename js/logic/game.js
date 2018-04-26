@@ -1,103 +1,44 @@
-import getElementFromTemplate from "../util";
-import {templates} from "../data/game-data";
+import getRandomNumber, {getElementFromTemplate} from "../util";
 import gameState from "./game-state";
-import changeScreen from "./change-screen";
-import statsTemplate from "../screens/game-results";
-import {GameType} from "../data/game-data";
-import headerTemplate from "../screens/header";
-import getResultTemplate from "../screens/statistic";
-import greetingDomElement from "../screens/greeting";
+import changeScreen, {footer} from "./change-screen";
+import GameType from "../data/game-data";
+import GameFirstView from "../views/game-first-view";
+import GameSecondView from "../views/game-second-view";
+import GameThirdView from "../views/game-third-view";
+import GameResultsView from "../views/game-results-view";
+import StatisticView from "../views/statistic-view";
+import renderHeader from "../screens/header-screen";
 
-const CHECKED_RADIO_COUNT = 2;
+const gameScreen = document.querySelector(`.central`);
 
-const screen = document.querySelector(`.central`);
+export const gameType = [new GameFirstView(GameType.first), new GameSecondView(GameType.second), new GameThirdView(GameType.third)];
 
-export const renderScreen = (template) => {
-  screen.innerHTML = ``;
-  const newTemplate = template.type(template.game);
-  const gameScreen = screen.appendChild(getElementFromTemplate(headerTemplate(gameState)));
-  gameScreen.appendChild(getElementFromTemplate(newTemplate));
-  const game = gameScreen.querySelector(`.game`);
-  game.appendChild(getElementFromTemplate(getResultTemplate(gameState.answers)));
+export const renderScreen = (game) => {
+  gameScreen.innerHTML = ``;
+  gameScreen.appendChild(renderHeader(gameState).element);
+  gameScreen.appendChild(game.element);
+  gameScreen.appendChild(new StatisticView(gameState.answers).element);
+  gameScreen.appendChild(getElementFromTemplate(footer));
+};
 
-  const form = gameScreen.querySelector(`.game__content`);
-  const gameAnswer = form.querySelectorAll(`.game__answer`);
-  const radio = form.querySelectorAll(`[type=radio]`);
-  const backButton = document.querySelector(`.back`);
+const onUserAnswer = (userAnswer) => {
+  gameState.answers.push({correct: userAnswer, time: 15});
 
-  if (gameState.answers.length < 10) {
-    if (gameState.lives === 0) {
-      gameState.win = false;
-      changeScreen(getElementFromTemplate(statsTemplate(gameState)));
-    }
+  if (!userAnswer) {
+    gameState.lives--;
+  }
 
-    if (form.classList.contains(`game__content--wide`)) {
-      gameAnswer.forEach(function (element) {
-        element.addEventListener(`click`, (evt) => {
-          let target = evt.target;
-          let answer;
-
-          if (target.tagName === `INPUT`) {
-            answer = target;
-          }
-          if (answer.value === GameType.second.answer.answer1) {
-            gameState.answers.push({correct: true, time: 15});
-          } else {
-            gameState.lives--;
-            gameState.answers.push({correct: false, time: 15});
-          }
-
-          form.reset();
-          renderScreen(templates[2]);
-        });
-      });
-    } else if (form.classList.contains(`game__content--triple`)) {
-      form.addEventListener(`click`, (evt) => {
-        let target = evt.target;
-        if (target.children[0].src === GameType.third.answer.answer1) {
-          gameState.answers.push({correct: true, time: 22});
-        } else {
-          gameState.lives--;
-          gameState.answers.push({correct: false, time: 15});
-        }
-
-        renderScreen(templates[0]);
-      });
-    } else {
-      gameAnswer.forEach(function (element) {
-        element.addEventListener(`click`, () => {
-          let checked = [];
-
-          for (const item of radio) {
-            // запись чекнутого элемента в массив
-            if (item.checked) {
-              checked.push(item);
-            }
-          }
-
-          if (checked.length === CHECKED_RADIO_COUNT) {
-            if (checked[0].value === GameType.first.answer.answer1 && checked[1].value === GameType.first.answer.answer2) {
-              gameState.answers.push({correct: true, time: 8});
-            } else {
-              gameState.lives--;
-              gameState.answers.push({correct: false, time: 15});
-            }
-            form.reset();
-            renderScreen(templates[1]);
-          }
-        });
-      });
-    }
-  } else {
+  if (gameState.answers.length === 10 || gameState.lives === 0) {
     const answerWrong = gameState.answers.filter((answer) => {
       return answer.correct === false;
     });
     gameState.win = answerWrong < 3 ? true : false;
-    changeScreen(getElementFromTemplate(statsTemplate(gameState)));
+    changeScreen(new GameResultsView(gameState).element);
+  } else {
+    renderScreen(gameType[getRandomNumber(0, 2)]);
   }
-
-  backButton.onclick = () => {
-    form.reset();
-    changeScreen(greetingDomElement);
-  };
 };
+
+gameType.forEach((element) => {
+  element.onAnswer = onUserAnswer;
+});

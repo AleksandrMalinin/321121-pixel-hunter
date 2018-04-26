@@ -1,7 +1,3 @@
-import gameFirstTemplate from "../screens/game-first";
-import gameSecondTemplate from "../screens/game-second";
-import gameThirdTemplate from "../screens/game-third";
-
 const GameType = {
   first: {
     question: `Угадайте для каждого изображения фото или рисунок?`,
@@ -36,19 +32,4 @@ const GameType = {
   }
 };
 
-const templates = [
-  {
-    type: gameFirstTemplate,
-    game: GameType.first
-  },
-  {
-    type: gameSecondTemplate,
-    game: GameType.second
-  },
-  {
-    type: gameThirdTemplate,
-    game: GameType.third
-  }
-];
-
-export {GameType, templates};
+export default GameType;
