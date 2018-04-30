@@ -1,11 +1,11 @@
 import AbstractView from "./abstract-view";
-import GameType from "../data/game-data";
 
 class GameSecondView extends AbstractView {
-  constructor(type) {
+  constructor(level) {
     super();
-    this.question = type.question;
-    this.images = type.images;
+    this.question = level.question;
+    this.images = level.images;
+    this.answer = level.answer;
   }
 
   get template() {
@@ -42,7 +42,7 @@ class GameSecondView extends AbstractView {
         answer = target;
       }
 
-      const userAnswer = answer.value === GameType.second.answer.answer1;
+      const userAnswer = answer.value === this.answer.answer1;
       this.onAnswer(userAnswer);
       form.reset();
     };

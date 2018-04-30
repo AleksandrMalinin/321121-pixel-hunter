@@ -1,4 +1,6 @@
 import AbstractView from "./abstract-view";
+import Application from "../application";
+import FooterView from "./footer-view";
 
 class GreetingView extends AbstractView {
   constructor() {
@@ -19,17 +21,15 @@ class GreetingView extends AbstractView {
           Помни, главное — смотреть очень внимательно.</p>
       </div>
       <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
-    </div>`;
+    </div>
+    ${new FooterView().template}`;
   }
 
   bind() {
     const continueButton = this.element.querySelector(`.greeting__continue`);
     continueButton.onclick = () => {
-      this.onButtonClick();
+      Application.showRules();
     };
-  }
-
-  onButtonClick() {
   }
 }
 

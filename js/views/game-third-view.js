@@ -1,11 +1,11 @@
 import AbstractView from "./abstract-view";
-import GameType from "../data/game-data";
 
 class GameThirdView extends AbstractView {
-  constructor(type) {
+  constructor(level) {
     super();
-    this.question = type.question;
-    this.images = type.images;
+    this.question = level.question;
+    this.images = level.images;
+    this.answer = level.answer;
   }
 
   get template() {
@@ -34,7 +34,7 @@ class GameThirdView extends AbstractView {
 
     form.onclick = (evt) => {
       let target = evt.target;
-      const userAnswer = target.children[0].src === GameType.third.answer.answer1;
+      const userAnswer = target.children[0].src === this.answer.answer1;
       this.onAnswer(userAnswer);
     };
   }

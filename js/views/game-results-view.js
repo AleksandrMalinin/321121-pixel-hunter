@@ -1,9 +1,9 @@
 import AbstractView from "./abstract-view";
 import StatisticView from "./statistic-view";
 import {countPoints, getAnswersQuantity} from "../logic/game-statistic";
-import renderGreetingScreen from "../screens/greeting-screen";
-import changeScreen from "../logic/change-screen";
 import constants from "../constants";
+import Application from "../application";
+import FooterView from "./footer-view";
 
 class GameResultsView extends AbstractView {
   constructor(state) {
@@ -113,14 +113,15 @@ class GameResultsView extends AbstractView {
           <td colspan="5" class="result__total  result__total--final">950</td>
         </tr>
       </table>
-    </div>`;
+    </div>
+    ${new FooterView().template}`;
   }
 
   bind() {
     const backButton = this.element.querySelector(`.back`);
 
     backButton.onclick = () => {
-      changeScreen(renderGreetingScreen().element);
+      Application.showGreeting();
     };
   }
 }

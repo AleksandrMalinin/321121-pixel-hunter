@@ -1,4 +1,5 @@
 import AbstractView from "./abstract-view";
+import Application from "../application";
 
 class HeaderView extends AbstractView {
   constructor(state) {
@@ -29,11 +30,8 @@ class HeaderView extends AbstractView {
 
   bind() {
     this.element.querySelector(`.back`).addEventListener(`click`, () => {
-      this.onButtonClick();
+      Application.showGreeting();
     });
-  }
-
-  onButtonClick() {
   }
 }
 
