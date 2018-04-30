@@ -1,4 +1,5 @@
 import AbstractView from "./abstract-view";
+import constants from "../constants";
 
 const getAnswerType = (answer) => {
   let answerType = ``;
@@ -10,11 +11,11 @@ const getAnswerType = (answer) => {
     answerType = `wrong`;
   }
 
-  if (answer.correct && answer.time < 10) {
+  if (answer.correct && answer.time < constants.LOWER_TIME_LIMIT) {
     answerType = `fast`;
   }
 
-  if (answer.correct && answer.time > 20) {
+  if (answer.correct && answer.time > constants.HIGHER_TIME_LIMIT) {
     answerType = `slow`;
   }
 

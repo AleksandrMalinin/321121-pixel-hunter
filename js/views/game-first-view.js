@@ -1,6 +1,5 @@
 import AbstractView from "./abstract-view";
 import constants from "../constants";
-import FooterView from "./footer-view";
 
 class GameFirstView extends AbstractView {
   constructor(level) {
