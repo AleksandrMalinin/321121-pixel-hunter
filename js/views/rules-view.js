@@ -1,7 +1,7 @@
 import AbstractView from "./abstract-view";
-import renderGreetingScreen from "../screens/greeting-screen";
-import changeScreen from "../logic/change-screen";
 import constants from "../constants";
+import Application from "../application";
+import FooterView from "./footer-view";
 
 class RulesView extends AbstractView {
   constructor() {
@@ -33,7 +33,8 @@ class RulesView extends AbstractView {
         <input class="rules__input" type="text" placeholder="Ваше Имя">
         <button class="rules__button  continue" type="submit" disabled>Go!</button>
       </form>
-    </div>`;
+    </div>
+    ${new FooterView().template}`;
   }
 
   bind() {
@@ -48,16 +49,13 @@ class RulesView extends AbstractView {
 
     button.onclick = (evt) => {
       evt.preventDefault();
-      this.onButtonClick();
+      Application.showGame();
       form.reset();
     };
 
     backButton.onclick = () => {
-      changeScreen(renderGreetingScreen().element);
+      Application.showGreeting();
     };
-  }
-
-  onButtonClick() {
   }
 }
 

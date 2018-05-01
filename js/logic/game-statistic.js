@@ -6,11 +6,11 @@ export const getAnswersQuantity = (state) => {
   });
 
   const slowAnswers = state.answers.filter((answer) => {
-    return answer.time > constants.HIGHER_TIME_LIMIT;
+    return answer.time > constants.HIGHER_TIME_LIMIT && answer.correct;
   });
 
   const fastAnswers = state.answers.filter((answer) => {
-    return answer.time < constants.LOWER_TIME_LIMIT;
+    return answer.time < constants.LOWER_TIME_LIMIT && answer.correct;
   });
 
   const answersQuantity = {

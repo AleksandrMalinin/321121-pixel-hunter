@@ -1,12 +1,12 @@
 import AbstractView from "./abstract-view";
-import GameType from "../data/game-data";
 import constants from "../constants";
 
 class GameFirstView extends AbstractView {
-  constructor(type) {
+  constructor(level) {
     super();
-    this.question = type.question;
-    this.images = type.images;
+    this.question = level.question;
+    this.images = level.images;
+    this.answer = level.answer;
   }
 
   get template() {
@@ -58,7 +58,7 @@ class GameFirstView extends AbstractView {
       }
 
       if (checked.length === constants.CHECKED_RADIO_COUNT) {
-        const userAnswer = checked[0].value === GameType.first.answer.answer1 && checked[1].value === GameType.first.answer.answer2;
+        const userAnswer = checked[0].value === this.answer.answer1 && checked[1].value === this.answer.answer2;
         this.onAnswer(userAnswer);
         form.reset();
       }

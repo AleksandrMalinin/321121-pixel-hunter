@@ -1,4 +1,3 @@
-import renderLoadScreen from "./screens/load-screen";
-import changeScreen from "./logic/change-screen";
+import Application from "./application";
 
-changeScreen(renderLoadScreen().element);
+Application.showLoad();
