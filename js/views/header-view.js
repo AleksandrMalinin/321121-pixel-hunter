@@ -32,6 +32,10 @@ class HeaderView extends AbstractView {
     this.element.querySelector(`.back`).addEventListener(`click`, () => {
       Application.showGreeting();
     });
+
+    if (this.state.time <= 5) {
+      this.element.querySelector(`.game__timer`).classList.add(`flashing`);
+    }
   }
 }
 

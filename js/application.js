@@ -31,9 +31,12 @@ class Application {
     window.fetch(constants.SERVER_URL).
         then(checkStatus).
         then((response) => response.json()).
-        then(() => setTimeout(() => {
-          Application.showGreeting();
-        }, 3000)).
+        // then(() => {
+        //   setTimeout(() => {
+        //     this.showGreeting();
+        //   }, 3000);
+        // }).
+        then(Application.showGreeting).
         catch(showErrorMessage).
         then(() => splash.stop());
   }
