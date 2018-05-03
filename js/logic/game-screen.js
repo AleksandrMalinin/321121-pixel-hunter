@@ -91,15 +91,15 @@ class GameScreen {
     const gameType = this.model.getCurrentLevel().type;
     let level;
 
-    if (gameType === `type-of-image`) {
+    if (gameType === `two-of-two`) {
       level = new GameFirstView(this.model.getCurrentLevel());
     }
 
-    if (gameType === `photo-or-paint`) {
+    if (gameType === `tinder-like`) {
       level = new GameSecondView(this.model.getCurrentLevel());
     }
 
-    if (gameType === `which-is-paint`) {
+    if (gameType === `one-of-three`) {
       level = new GameThirdView(this.model.getCurrentLevel());
     }
 

@@ -12,7 +12,8 @@ const constants = {
     time: 30,
     win: false,
     level: 0
-  })
+  }),
+  SERVER_URL: `https://es.dump.academy/pixel-hunter/questions`
 };
 
 export default constants;

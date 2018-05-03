@@ -5,8 +5,7 @@ class GameFirstView extends AbstractView {
   constructor(level) {
     super();
     this.question = level.question;
-    this.images = level.images;
-    this.answer = level.answer;
+    this.answers = level.answers;
   }
 
   get template() {
@@ -15,24 +14,24 @@ class GameFirstView extends AbstractView {
       <p class="game__task">${this.question}</p>
       <form class="game__content">
         <div class="game__option">
-          <img src="${this.images.paint}" alt="Option 1" width="468" height="458">
+          <img src="${this.answers[0].image.url}" alt="Option 1" width="468" height="458">
           <label class="game__answer game__answer--photo">
             <input name="question1" type="radio" value="photo">
             <span>Фото</span>
           </label>
           <label class="game__answer game__answer--paint">
-            <input name="question1" type="radio" value="paint">
+            <input name="question1" type="radio" value="painting">
             <span>Рисунок</span>
           </label>
         </div>
         <div class="game__option">
-          <img src="${this.images.photo}" alt="Option 2" width="468" height="458">
+          <img src="${this.answers[1].image.url}" alt="Option 2" width="468" height="458">
           <label class="game__answer  game__answer--photo">
             <input name="question2" type="radio" value="photo">
             <span>Фото</span>
           </label>
           <label class="game__answer  game__answer--paint">
-            <input name="question2" type="radio" value="paint">
+            <input name="question2" type="radio" value="painting">
             <span>Рисунок</span>
           </label>
         </div>
@@ -58,7 +57,7 @@ class GameFirstView extends AbstractView {
       }
 
       if (checked.length === constants.CHECKED_RADIO_COUNT) {
-        const userAnswer = checked[0].value === this.answer.answer1 && checked[1].value === this.answer.answer2;
+        const userAnswer = checked[0].value === this.answers[0].type && checked[1].value === this.answers[1].type;
         this.onAnswer(userAnswer);
         form.reset();
       }
