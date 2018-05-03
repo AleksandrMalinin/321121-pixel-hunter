@@ -6,7 +6,6 @@ class GameModel {
     this.data = data;
     this.player = player;
     this.restart();
-    console.log(this.data);
   }
 
   get state() {
