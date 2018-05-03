@@ -5,7 +5,6 @@ class GameThirdView extends AbstractView {
     super();
     this.question = level.question;
     this.answers = level.answers;
-    // this.answer = level.answer;
   }
 
   get template() {
@@ -36,21 +35,16 @@ class GameThirdView extends AbstractView {
       return elem;
     });
     let answerUrl = ``;
-    console.log(answers);
 
-    for (let i = 0; i <= answers.length; i++) {
+    for (let i = 0; i < answers.length; i++) {
       if (answers[i].type === answer) {
         answerUrl = answers[i].image.url;
-        console.log(answers[i]);
       }
     }
 
     form.onclick = (evt) => {
       let target = evt.target;
       const userAnswer = target.children[0].src === answerUrl;
-      console.log(answer);
-      console.log(userAnswer);
-      console.log(answers);
       this.onAnswer(userAnswer);
     };
   }
