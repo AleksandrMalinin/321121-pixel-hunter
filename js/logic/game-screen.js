@@ -10,7 +10,7 @@ class GameScreen {
   constructor(model) {
     this.model = model;
     this.header = new HeaderView(this.model.state);
-    this.content = new GameFirstView(this.model.getCurrentLevel());
+    this.content = this.getNeededView();
     this.statistic = new StatisticView(this.model.state.answers);
     this.footer = new FooterView();
 
@@ -40,6 +40,24 @@ class GameScreen {
       }
       this.updateHeader();
     }, 1000);
+  }
+
+  getNeededView() {
+    const gameType = this.model.data[this.model.state.level].type;
+    let level;
+
+    if (gameType === `two-of-two`) {
+      level = new GameFirstView(this.model.getCurrentLevel());
+    }
+
+    if (gameType === `tinder-like`) {
+      level = new GameSecondView(this.model.getCurrentLevel());
+    }
+
+    if (gameType === `one-of-three`) {
+      level = new GameThirdView(this.model.getCurrentLevel());
+    }
+    return level;
   }
 
   init() {
@@ -91,15 +109,15 @@ class GameScreen {
     const gameType = this.model.getCurrentLevel().type;
     let level;
 
-    if (gameType === `type-of-image`) {
+    if (gameType === `two-of-two`) {
       level = new GameFirstView(this.model.getCurrentLevel());
     }
 
-    if (gameType === `photo-or-paint`) {
+    if (gameType === `tinder-like`) {
       level = new GameSecondView(this.model.getCurrentLevel());
     }
 
-    if (gameType === `which-is-paint`) {
+    if (gameType === `one-of-three`) {
       level = new GameThirdView(this.model.getCurrentLevel());
     }
 

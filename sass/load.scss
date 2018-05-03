@@ -1,0 +1,13 @@
+.load {
+  transform-origin: center -10px;
+  animation-name: load;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+}
+
+@keyframes load {
+  100% {
+    transform: rotate(360deg);
+  }
+}

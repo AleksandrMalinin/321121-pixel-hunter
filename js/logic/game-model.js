@@ -1,11 +1,9 @@
-import GameLevels from "../data/game-data";
 import initialGame from "./initial-game";
 import constants from "../constants";
 
-const getLevel = (index) => GameLevels[index];
-
 class GameModel {
-  constructor(player) {
+  constructor(data, player) {
+    this.data = data;
     this.player = player;
     this.restart();
   }
@@ -14,12 +12,16 @@ class GameModel {
     return this._state;
   }
 
+  getLevel(index) {
+    return this.data[index];
+  }
+
   getCurrentLevel() {
-    return getLevel(this._state.level);
+    return this.getLevel(this._state.level);
   }
 
   hasNextLevel() {
-    return getLevel(this._state.level + 1) !== void 0;
+    return this.getLevel(this._state.level + 1) !== void 0;
   }
 
   nextLevel() {
