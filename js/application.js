@@ -2,10 +2,10 @@ import GreetingView from "./views/greeting-view";
 import RulesView from "./views/rules-view";
 import GameScreen from "./logic/game-screen";
 import GameModel from "./logic/game-model";
-import GameResultsView from "./views/game-results-view";
 import SplashScreen from "./splash/splash-screen";
-import constants from "./constants";
 import {showErrorMessage} from "./util";
+import Loader from "./loader";
+import ManyResultsView from "./views/many-results-view";
 
 const changeScreen = (domElement) => {
   const screen = document.querySelector(`.central`);
@@ -13,36 +13,30 @@ const changeScreen = (domElement) => {
   screen.appendChild(domElement);
 };
 
-const checkStatus = (response) => {
-  if (response.ok) {
-    return response;
-  } else {
-    throw new Error(`${response.status}: ${response.statusText}`);
-  }
-};
-
 let gameData;
 
 class Application {
   static start() {
     const splash = new SplashScreen();
-    changeScreen(splash.element);
-    splash.start();
-    window.fetch(constants.SERVER_URL).
-        then(checkStatus).
-        then((response) => response.json()).
-        // then(() => {
-        //   setTimeout(() => {
-        //     this.showGreeting();
-        //   }, 3000);
-        // }).
-        then(Application.showGreeting).
-        catch(showErrorMessage).
-        then(() => splash.stop());
+    const greeting = new GreetingView();
+    greeting.hide();
+    greeting.addElement(splash.element);
+    changeScreen(greeting.element);
+    Loader.loadData().
+        then((data) => {
+          gameData = data;
+          return gameData;
+        }).
+        then(() => greeting.fadeIn()).
+        then(() =>splash.fadeOut()).
+        then(() =>
+          setTimeout(() => {
+            greeting.removeElement(splash.element);
+          }, 3000)).
+        catch(showErrorMessage);
   }
 
-  static showGreeting(data) {
-    gameData = data;
+  static showGreeting() {
     const greeting = new GreetingView();
     changeScreen(greeting.element);
   }
@@ -58,9 +52,15 @@ class Application {
     game.init();
   }
 
-  static showResults(state) {
-    const results = new GameResultsView(state);
-    changeScreen(results.element);
+  static showResults(model) {
+    const playerName = model.player;
+    Loader.saveResults(model.state, playerName).
+        then(() => Loader.loadResults(playerName)).
+        then((data) => {
+          const results = new ManyResultsView(data, playerName);
+          changeScreen(results.element);
+        }).
+        catch(showErrorMessage);
   }
 }
 

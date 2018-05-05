@@ -5,11 +5,12 @@ import FooterView from "../views/footer-view";
 import GameFirstView from "../views/game-first-view";
 import GameSecondView from "../views/game-second-view";
 import GameThirdView from "../views/game-third-view";
+import ModalView from "../views/modal-view";
 
 class GameScreen {
   constructor(model) {
     this.model = model;
-    this.header = new HeaderView(this.model.state);
+    this.header = this.getHeader();
     this.content = this.getNeededView();
     this.statistic = new StatisticView(this.model.state.answers);
     this.footer = new FooterView();
@@ -25,6 +26,29 @@ class GameScreen {
 
   get element() {
     return this.root;
+  }
+
+  getHeader() {
+    const header = new HeaderView(this.model.state);
+    header.onButtonClick = () => {
+      this.stopGame();
+      this.root.appendChild(this.getModal().element);
+      this.root.lastChild.style = `position: fixed; top: 25%; left: 50%; transform: translateX( -50%); z-index: 1;`;
+    };
+
+    return header;
+  }
+
+  getModal() {
+    const modal = new ModalView();
+    modal.onExitClick = () => {
+      Application.showGreeting();
+    };
+    modal.onContinueClick = () => {
+      this.root.lastChild.remove();
+      this.startTimer();
+    };
+    return modal;
   }
 
   stopGame() {
@@ -85,12 +109,12 @@ class GameScreen {
   }
 
   endGame() {
-    Application.showResults(this.model.state);
+    Application.showResults(this.model);
     this.model.restart();
   }
 
   updateHeader() {
-    const header = new HeaderView(this.model.state);
+    const header = this.getHeader();
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
   }

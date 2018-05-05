@@ -1,0 +1,37 @@
+.modal {
+  box-sizing: border-box;
+  width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: darkcyan;
+  border-radius: 30px;
+  border: 1px solid slategray;
+}
+
+.modal__text {
+  margin: 0;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.modal__container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.modal__button {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  width: 90px;
+  padding: 5px 0;
+  color: inherit;
+  background-color: rgb(11, 102, 35);
+  border-radius: 15px;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(11, 102, 35, 0.5);
+  }
+}
