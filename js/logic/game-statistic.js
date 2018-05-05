@@ -13,19 +13,16 @@ export const getAnswersQuantity = (state) => {
     return answer.time < constants.LOWER_TIME_LIMIT && answer.correct;
   });
 
-  const answersQuantity = {
+  return {
     correct: correctAnswers.length,
     slow: slowAnswers.length,
     fast: fastAnswers.length,
     lives: state.lives
   };
-
-  return answersQuantity;
 };
 
 export const countPoints = (answers) => {
-  const points = answers.correct * constants.CORRECT_ANSWER + answers.fast * constants.ADDITIONAL_POINTS + answers.slow * -constants.ADDITIONAL_POINTS + answers.lives * constants.ADDITIONAL_POINTS;
-  return points;
+  return answers.correct * constants.CORRECT_ANSWER + answers.fast * constants.ADDITIONAL_POINTS + answers.slow * -constants.ADDITIONAL_POINTS + answers.lives * constants.ADDITIONAL_POINTS;
 };
 
 export function CountTime(value) {
