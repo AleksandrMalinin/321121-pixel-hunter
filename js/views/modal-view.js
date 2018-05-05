@@ -18,13 +18,13 @@ class ModalView extends AbstractView {
 
   bind() {
     this.element.querySelectorAll(`.modal__button`).forEach((elem) => {
-      elem.onclick = () => {
+      elem.addEventListener(`click`, () => {
         if (elem.classList.contains(`modal__yes`)) {
           this.onExitClick();
         } else {
           this.onContinueClick();
         }
-      };
+      });
     });
   }
 

@@ -19,7 +19,7 @@ class GameResultsView extends AbstractView {
     return `
           <table class="result__table">
         <tr>
-          <td class="result__number">${this.index}</td>
+          <td class="result__number">${this.index}.</td>
           <td colspan="2">
             ${this.statsview}
           </td>

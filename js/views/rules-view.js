@@ -47,15 +47,15 @@ class RulesView extends AbstractView {
       button.disabled = input.value.length < constants.MIN_NAME_LENGTH ? true : false;
     };
 
-    button.onclick = (evt) => {
+    button.addEventListener(`click`, (evt) => {
       evt.preventDefault();
       Application.showGame(input.value);
       form.reset();
-    };
+    });
 
-    backButton.onclick = () => {
+    backButton.addEventListener(`click`, () => {
       Application.showGreeting();
-    };
+    });
   }
 }
 
