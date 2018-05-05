@@ -2,24 +2,19 @@ import AbstractView from "./abstract-view";
 import constants from "../constants";
 
 const getAnswerType = (answer) => {
-  let answerType = ``;
-  if (answer.correct) {
-    answerType = `correct`;
-  }
-
   if (!answer.correct) {
-    answerType = `wrong`;
+    return `wrong`;
   }
 
   if (answer.correct && answer.time < constants.LOWER_TIME_LIMIT) {
-    answerType = `fast`;
+    return `fast`;
   }
 
   if (answer.correct && answer.time > constants.HIGHER_TIME_LIMIT) {
-    answerType = `slow`;
+    return `slow`;
   }
 
-  return answerType;
+  return `correct`;
 };
 
 class StatisticView extends AbstractView {

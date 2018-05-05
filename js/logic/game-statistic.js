@@ -24,25 +24,3 @@ export const getAnswersQuantity = (state) => {
 export const countPoints = (answers) => {
   return answers.correct * constants.CORRECT_ANSWER + answers.fast * constants.ADDITIONAL_POINTS + answers.slow * -constants.ADDITIONAL_POINTS + answers.lives * constants.ADDITIONAL_POINTS;
 };
-
-export function CountTime(value) {
-  if (typeof value !== `number`) {
-    throw new Error(`Value should be a number`);
-  }
-
-  if (value < 0) {
-    throw new Error(`Value should not be negative number`);
-  }
-
-  this.time = value;
-  this.tick = () => {
-    if (this.time === 0) {
-      return `time is over`;
-    }
-
-    return this.time--;
-  };
-}
-
-export const timer = new CountTime(10);
-timer.tick();

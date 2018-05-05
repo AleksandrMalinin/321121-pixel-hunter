@@ -36,17 +36,18 @@ class GameThirdView extends AbstractView {
     });
     let answerUrl = ``;
 
-    for (let i = 0; i < answers.length; i++) {
-      if (answers[i].type === answer) {
-        answerUrl = answers[i].image.url;
+    for (let item of answers) {
+      if (item.type === answer) {
+        answerUrl = item.image.url;
+        break;
       }
     }
 
-    form.onclick = (evt) => {
+    form.addEventListener(`click`, (evt) => {
       let target = evt.target;
       const userAnswer = target.children[0].src === answerUrl;
       this.onAnswer(userAnswer);
-    };
+    });
   }
 }
 

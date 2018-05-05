@@ -27,8 +27,8 @@ const getLevel = (game, model) => {
 class GameScreen {
   constructor(model) {
     this.model = model;
-    this.header = this.getHeader();
-    this.content = this.getNeededView();
+    this.header = this._getHeader();
+    this.content = this._getNeededView();
     this.statistic = new StatisticView(this.model.state.answers);
     this.footer = new FooterView();
 
@@ -45,56 +45,56 @@ class GameScreen {
     return this.root;
   }
 
-  getHeader() {
+  _getHeader() {
     const header = new HeaderView(this.model.state);
     header.onButtonClick = () => {
-      this.stopGame();
-      this.root.appendChild(this.getModal().element);
+      this._stopGame();
+      this.root.appendChild(this._getModal().element);
       this.root.lastChild.style = `position: fixed; top: 25%; left: 50%; transform: translateX( -50%); z-index: 1;`;
     };
 
     return header;
   }
 
-  getModal() {
+  _getModal() {
     const modal = new ModalView();
     modal.onExitClick = () => {
       Application.showGreeting();
     };
     modal.onContinueClick = () => {
       this.root.lastChild.remove();
-      this.startTimer();
+      this._startTimer();
     };
     return modal;
   }
 
-  stopGame() {
+  _stopGame() {
     clearInterval(this._interval);
   }
 
-  startTimer() {
+  _startTimer() {
     this._interval = setInterval(() => {
       this.model.tick();
       if (this.model.state.time <= 0) {
-        this.stopGame();
-        this.userAnswer(false);
+        this._stopGame();
+        this._userAnswer(false);
       }
-      this.updateHeader();
+      this._updateHeader();
     }, 1000);
   }
 
-  getNeededView() {
+  _getNeededView() {
     const gameType = this.model.data[this.model.state.level].type;
     return getLevel(gameType, this.model);
   }
 
   init() {
-    this.changeLevel();
-    this.startTimer();
+    this._changeLevel();
+    this._startTimer();
   }
 
-  userAnswer(answer) {
-    this.stopGame();
+  _userAnswer(answer) {
+    this._stopGame();
     this.model.addAnswer(answer);
 
     if (!answer) {
@@ -105,42 +105,42 @@ class GameScreen {
       if (!this.model.isDead()) {
         this.model.win();
       }
-      this.endGame();
+      this._endGame();
     } else {
       this.model.nextLevel();
       this.init();
     }
   }
 
-  endGame() {
+  _endGame() {
     Application.showResults(this.model);
     this.model.restart();
   }
 
-  updateHeader() {
-    const header = this.getHeader();
+  _updateHeader() {
+    const header = this._getHeader();
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
   }
 
-  updateStatistic() {
+  _updateStatistic() {
     const statistic = new StatisticView(this.model.state.answers);
     this.root.replaceChild(statistic.element, this.statistic.element);
     this.statistic = statistic;
   }
 
-  changeLevel() {
+  _changeLevel() {
     this.model.rebootTime();
-    this.updateHeader();
-    this.updateStatistic();
+    this._updateHeader();
+    this._updateStatistic();
 
     const gameType = this.model.getCurrentLevel().type;
     const level = getLevel(gameType, this.model);
-    level.onAnswer = this.userAnswer.bind(this);
-    this.changeContentView(level);
+    level.onAnswer = this._userAnswer.bind(this);
+    this._changeContentView(level);
   }
 
-  changeContentView(view) {
+  _changeContentView(view) {
     this.root.replaceChild(view.element, this.content.element);
     this.content = view;
   }
