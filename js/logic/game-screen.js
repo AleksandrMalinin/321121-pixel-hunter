@@ -7,6 +7,23 @@ import GameSecondView from "../views/game-second-view";
 import GameThirdView from "../views/game-third-view";
 import ModalView from "../views/modal-view";
 
+const getLevel = (game, model) => {
+  let level;
+
+  if (game === `two-of-two`) {
+    level = new GameFirstView(model.getCurrentLevel());
+  }
+
+  if (game === `tinder-like`) {
+    level = new GameSecondView(model.getCurrentLevel());
+  }
+
+  if (game === `one-of-three`) {
+    level = new GameThirdView(model.getCurrentLevel());
+  }
+  return level;
+};
+
 class GameScreen {
   constructor(model) {
     this.model = model;
@@ -68,20 +85,7 @@ class GameScreen {
 
   getNeededView() {
     const gameType = this.model.data[this.model.state.level].type;
-    let level;
-
-    if (gameType === `two-of-two`) {
-      level = new GameFirstView(this.model.getCurrentLevel());
-    }
-
-    if (gameType === `tinder-like`) {
-      level = new GameSecondView(this.model.getCurrentLevel());
-    }
-
-    if (gameType === `one-of-three`) {
-      level = new GameThirdView(this.model.getCurrentLevel());
-    }
-    return level;
+    return getLevel(gameType, this.model);
   }
 
   init() {
@@ -131,20 +135,7 @@ class GameScreen {
     this.updateStatistic();
 
     const gameType = this.model.getCurrentLevel().type;
-    let level;
-
-    if (gameType === `two-of-two`) {
-      level = new GameFirstView(this.model.getCurrentLevel());
-    }
-
-    if (gameType === `tinder-like`) {
-      level = new GameSecondView(this.model.getCurrentLevel());
-    }
-
-    if (gameType === `one-of-three`) {
-      level = new GameThirdView(this.model.getCurrentLevel());
-    }
-
+    const level = getLevel(gameType, this.model);
     level.onAnswer = this.userAnswer.bind(this);
     this.changeContentView(level);
   }
