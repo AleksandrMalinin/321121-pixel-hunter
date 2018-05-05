@@ -32,7 +32,8 @@ class Application {
         then(() =>
           setTimeout(() => {
             greeting.removeElement(splash.element);
-          }, 3000));
+          }, 3000)).
+        catch(showErrorMessage);
   }
 
   static showGreeting() {
@@ -59,7 +60,7 @@ class Application {
           const results = new ManyResultsView(data, playerName);
           changeScreen(results.element);
         });
-        // catch(showErrorMessage);
+    // catch(showErrorMessage);
   }
 }
 
