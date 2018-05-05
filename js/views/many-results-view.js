@@ -12,7 +12,7 @@ class ManyResultsView extends AbstractView {
     this.results = [];
 
     // выодить только три последних результата
-    for (let i = 0; i < constants.MAX_RESULTS_NUMBER; i++) {
+    for (let i = 0; i < Math.min(constants.MAX_RESULTS_NUMBER, this.data.length); i++) {
       this.results.push(new GameResultsView(this.data[i], i + 1).template);
     }
   }
