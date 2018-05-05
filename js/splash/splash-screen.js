@@ -1,5 +1,4 @@
 import AbstractView from "../views/abstract-view";
-import FooterView from "../views/footer-view";
 
 class SplashScreen extends AbstractView {
   constructor() {
@@ -13,16 +12,11 @@ class SplashScreen extends AbstractView {
         <h1 class="intro__asterisk load">*</h1>
         <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
       </div>
-    </div>
-    ${new FooterView().template}`;
+    </div>`;
   }
 
-  start() {
-    this.timeout = setTimeout(() => this.start(), 4000);
-  }
-
-  stop() {
-    clearTimeout(this.timeout);
+  fadeOut() {
+    this.element.classList.add(`fade--out`);
   }
 }
 

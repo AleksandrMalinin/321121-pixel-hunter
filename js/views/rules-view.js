@@ -49,7 +49,7 @@ class RulesView extends AbstractView {
 
     button.onclick = (evt) => {
       evt.preventDefault();
-      Application.showGame();
+      Application.showGame(input.value);
       form.reset();
     };
 

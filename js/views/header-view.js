@@ -1,5 +1,4 @@
 import AbstractView from "./abstract-view";
-import Application from "../application";
 
 class HeaderView extends AbstractView {
   constructor(state) {
@@ -30,12 +29,20 @@ class HeaderView extends AbstractView {
 
   bind() {
     this.element.querySelector(`.back`).addEventListener(`click`, () => {
-      Application.showGreeting();
+      this.onButtonClick();
+      this.stopFlashing();
     });
 
     if (this.state.time <= 5) {
       this.element.querySelector(`.game__timer`).classList.add(`flashing`);
     }
+  }
+
+  onButtonClick() {
+  }
+
+  stopFlashing() {
+    this.element.querySelector(`.game__timer`).classList.remove(`flashing`);
   }
 }
 

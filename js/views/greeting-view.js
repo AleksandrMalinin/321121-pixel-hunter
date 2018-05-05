@@ -31,6 +31,24 @@ class GreetingView extends AbstractView {
       Application.showRules();
     };
   }
+
+  hide() {
+    this.element.children[0].style.opacity = `0`;
+  }
+
+  fadeIn() {
+    this.element.children[1].style.opacity = `1`;
+    this.element.children[1].classList.add(`fade--in`);
+  }
+
+  addElement(element) {
+    this.element.insertAdjacentElement(`afterbegin`, element);
+    this.element.children[0].style = `position: absolute; top: 0;`;
+  }
+
+  removeElement(element) {
+    element.remove();
+  }
 }
 
 export default GreetingView;
