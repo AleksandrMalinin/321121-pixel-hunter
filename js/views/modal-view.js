@@ -26,6 +26,8 @@ class ModalView extends AbstractView {
         }
       });
     });
+
+    this.element.style = `position: fixed; top: 25%; left: 50%; transform: translateX( -50%); z-index: 1;`;
   }
 
   onExitClick() {

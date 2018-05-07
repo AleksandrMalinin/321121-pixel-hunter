@@ -44,7 +44,7 @@ class RulesView extends AbstractView {
     const form = this.element.querySelector(`.rules__form`);
     // имя не может состоять < чем из двух символов
     input.oninput = () => {
-      button.disabled = input.value.length < constants.MIN_NAME_LENGTH ? true : false;
+      button.disabled = input.value.length < constants.MIN_NAME_LENGTH;
     };
 
     button.addEventListener(`click`, (evt) => {

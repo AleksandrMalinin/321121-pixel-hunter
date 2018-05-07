@@ -8,20 +8,13 @@ import GameThirdView from "../views/game-third-view";
 import ModalView from "../views/modal-view";
 
 const getLevel = (game, model) => {
-  let level;
-
   if (game === `two-of-two`) {
-    level = new GameFirstView(model.getCurrentLevel());
+    return new GameFirstView(model.getCurrentLevel());
   }
-
   if (game === `tinder-like`) {
-    level = new GameSecondView(model.getCurrentLevel());
+    return new GameSecondView(model.getCurrentLevel());
   }
-
-  if (game === `one-of-three`) {
-    level = new GameThirdView(model.getCurrentLevel());
-  }
-  return level;
+  return new GameThirdView(model.getCurrentLevel());
 };
 
 class GameScreen {
@@ -50,7 +43,6 @@ class GameScreen {
     header.onButtonClick = () => {
       this._stopGame();
       this.root.appendChild(this._getModal().element);
-      this.root.lastChild.style = `position: fixed; top: 25%; left: 50%; transform: translateX( -50%); z-index: 1;`;
     };
 
     return header;

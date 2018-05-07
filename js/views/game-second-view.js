@@ -34,16 +34,15 @@ class GameSecondView extends AbstractView {
     const form = this.element.querySelector(`.game__content`);
 
     form.addEventListener(`change`, (evt) => {
-      let target = evt.target;
+      const target = evt.target;
       let answer;
 
       if (target.tagName === `INPUT`) {
         answer = target;
+        const userAnswer = answer.value === this.answers[0].type;
+        this.onAnswer(userAnswer);
+        form.reset();
       }
-
-      const userAnswer = answer.value === this.answers[0].type;
-      this.onAnswer(userAnswer);
-      form.reset();
     });
   }
 }
