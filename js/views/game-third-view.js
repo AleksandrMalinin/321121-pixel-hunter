@@ -31,12 +31,9 @@ class GameThirdView extends AbstractView {
   bind() {
     const form = this.element.querySelector(`.game__content`);
     const answer = this.question.includes(`фото`) ? `photo` : `painting`;
-    const answers = this.answers.map((elem) => {
-      return elem;
-    });
     let answerUrl = ``;
 
-    for (let item of answers) {
+    for (let item of this.answers) {
       if (item.type === answer) {
         answerUrl = item.image.url;
         break;

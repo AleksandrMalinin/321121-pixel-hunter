@@ -47,7 +47,7 @@ class GameFirstView extends AbstractView {
     const radio = form.querySelectorAll(`[type=radio]`);
 
     form.addEventListener(`change`, () => {
-      let checked = [];
+      const checked = [];
 
       for (const item of radio) {
         // запись чекнутого элемента в массив

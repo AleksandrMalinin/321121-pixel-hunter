@@ -43,7 +43,7 @@ class GameResultsView extends AbstractView {
         <tr>
           <td></td>
           <td class="result__extra">Штраф за медлительность:</td>
-          <td class="result__extra">${this.answerResult.lives}&nbsp;<span class="stats__result stats__result--slow"></span></td>
+          <td class="result__extra">${this.answerResult.slow}&nbsp;<span class="stats__result stats__result--slow"></span></td>
           <td class="result__points">×&nbsp;50</td>
           <td class="result__total">${this.answerResult.slow * -constants.ADDITIONAL_POINTS}</td>
         </tr>

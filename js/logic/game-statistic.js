@@ -2,7 +2,7 @@ import constants from "../constants";
 
 export const getAnswersQuantity = (state) => {
   const correctAnswers = state.answers.filter((answer) => {
-    return answer.correct === true;
+    return answer.correct;
   });
 
   const slowAnswers = state.answers.filter((answer) => {

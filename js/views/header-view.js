@@ -1,10 +1,12 @@
 import AbstractView from "./abstract-view";
+import constants from "../constants";
 
 class HeaderView extends AbstractView {
   constructor(state) {
     super();
     this.state = state;
   }
+
 
   get template() {
     return `
@@ -17,7 +19,7 @@ class HeaderView extends AbstractView {
       </div>
       <h1 class="game__timer">${this.state.time}</h1>
       <div class="game__lives">
-        ${new Array(3 - this.state.lives)
+        ${new Array(constants.INITIAL_STATE.lives - this.state.lives)
       .fill(`<img src="../../img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)
       .join(``)}
         ${new Array(this.state.lives)
@@ -33,7 +35,7 @@ class HeaderView extends AbstractView {
       this.stopFlashing();
     });
 
-    if (this.state.time <= 5) {
+    if (this.state.time <= constants.LAST_SEC) {
       this.element.querySelector(`.game__timer`).classList.add(`flashing`);
     }
   }
