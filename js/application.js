@@ -16,24 +16,22 @@ const changeScreen = (domElement) => {
 let gameData;
 
 class Application {
-  static start() {
+  static async start() {
     const splash = new SplashScreen();
     const greeting = new GreetingView();
     greeting.hide();
     greeting.addElement(splash.element);
     changeScreen(greeting.element);
-    Loader.loadData().
-        then((data) => {
-          gameData = data;
-          return gameData;
-        }).
-        then(() => greeting.fadeIn()).
-        then(() =>splash.fadeOut()).
-        then(() =>
-          setTimeout(() => {
-            greeting.removeElement(splash.element);
-          }, 3000)).
-        catch(showErrorMessage);
+    try {
+      gameData = await Loader.loadData();
+      greeting.fadeIn();
+      splash.fadeOut();
+      setTimeout(() => {
+        greeting.removeElement(splash.element);
+      }, 3000);
+    } catch (e) {
+      showErrorMessage(e);
+    }
   }
 
   static showGreeting() {
@@ -52,14 +50,15 @@ class Application {
     game.init();
   }
 
-  static showResults(model) {
+  static async showResults(model) {
     const playerName = model.player;
-    Loader.saveResults(model.state, playerName).
-        then(() => Loader.loadResults(playerName)).
-        then((data) => {
-          const results = new ManyResultsView(data, playerName);
-          changeScreen(results.element);
-        });
+    try {
+      await Loader.saveResults(model.state, playerName);
+      const results = new ManyResultsView(await Loader.loadResults(playerName), playerName);
+      changeScreen(results.element);
+    } catch (e) {
+      showErrorMessage(e);
+    }
   }
 }
 
