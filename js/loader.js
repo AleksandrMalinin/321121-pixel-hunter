@@ -14,19 +14,19 @@ const checkStatus = (response) => {
 const toJSON = (response) => response.json();
 
 export default class Loader {
-  static loadData() {
-    return fetch(`${constants.SERVER_URL}/questions`).
-        then(checkStatus).
-        then(toJSON);
+  static async loadData() {
+    const response = await fetch(`${constants.SERVER_URL}/questions`);
+    checkStatus(response);
+    return await toJSON(response);
   }
 
-  static loadResults(name = DEFAULT_NAME) {
-    return fetch(`${constants.SERVER_URL}/stats/${APP_ID}-${name}`).
-        then(checkStatus).
-        then(toJSON);
+  static async loadResults(name = DEFAULT_NAME) {
+    const response = await fetch(`${constants.SERVER_URL}/stats/${APP_ID}-${name}`);
+    checkStatus(response);
+    return await toJSON(response);
   }
 
-  static saveResults(data, name = DEFAULT_NAME) {
+  static async saveResults(data, name = DEFAULT_NAME) {
     const requestSettings = {
       body: JSON.stringify(data),
       headers: {
@@ -34,7 +34,8 @@ export default class Loader {
       },
       method: `POST`
     };
-    return fetch(`${constants.SERVER_URL}/stats/${APP_ID}-${name}`, requestSettings).
-        then(checkStatus);
+    const response = await fetch(`${constants.SERVER_URL}/stats/${APP_ID}-${name}`, requestSettings);
+    return checkStatus(response);
   }
 }
+

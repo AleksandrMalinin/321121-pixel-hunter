@@ -6,6 +6,7 @@ import SplashScreen from "./splash/splash-screen";
 import {showErrorMessage} from "./util";
 import Loader from "./loader";
 import ManyResultsView from "./views/many-results-view";
+import constants from "./constants";
 
 const changeScreen = (domElement) => {
   const screen = document.querySelector(`.central`);
@@ -15,25 +16,30 @@ const changeScreen = (domElement) => {
 
 let gameData;
 
+const pause = (time) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+};
+
 class Application {
-  static start() {
+  static async start() {
     const splash = new SplashScreen();
     const greeting = new GreetingView();
     greeting.hide();
     greeting.addElement(splash.element);
     changeScreen(greeting.element);
-    Loader.loadData().
-        then((data) => {
-          gameData = data;
-          return gameData;
-        }).
-        then(() => greeting.fadeIn()).
-        then(() =>splash.fadeOut()).
-        then(() =>
-          setTimeout(() => {
-            greeting.removeElement(splash.element);
-          }, 3000)).
-        catch(showErrorMessage);
+    try {
+      gameData = await Loader.loadData();
+      greeting.fadeIn();
+      splash.fadeOut();
+      await pause(constants.PAUSE_TIME);
+      greeting.removeElement(splash.element);
+    } catch (e) {
+      showErrorMessage(e);
+    }
   }
 
   static showGreeting() {
@@ -52,14 +58,15 @@ class Application {
     game.init();
   }
 
-  static showResults(model) {
+  static async showResults(model) {
     const playerName = model.player;
-    Loader.saveResults(model.state, playerName).
-        then(() => Loader.loadResults(playerName)).
-        then((data) => {
-          const results = new ManyResultsView(data, playerName);
-          changeScreen(results.element);
-        });
+    try {
+      await Loader.saveResults(model.state, playerName);
+      const results = new ManyResultsView(await Loader.loadResults(playerName), playerName);
+      changeScreen(results.element);
+    } catch (e) {
+      showErrorMessage(e);
+    }
   }
 }
 
