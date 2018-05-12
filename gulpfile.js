@@ -12,6 +12,7 @@ const minify = require('gulp-csso');
 const rename = require('gulp-rename');
 const imagemin = require('gulp-imagemin');
 const rollup = require('gulp-better-rollup');
+const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
@@ -62,6 +63,12 @@ gulp.task('scripts', function () {
     }, 'iife'))
     .pipe(sourcemaps.write(''))
     .pipe(gulp.dest('build/js/'));
+});
+
+gulp.task('gulp-uglify', function(){
+  gulp.src('js/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('build/js'))
 });
 
 gulp.task('test', function () {

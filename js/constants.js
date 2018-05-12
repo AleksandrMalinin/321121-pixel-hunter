@@ -15,7 +15,8 @@ const constants = {
   }),
   SERVER_URL: `https://es.dump.academy/pixel-hunter`,
   MAX_RESULTS_NUMBER: 3,
-  LAST_SEC: 5
+  LAST_SEC: 5,
+  PAUSE_TIME: 3000
 };
 
 export default constants;

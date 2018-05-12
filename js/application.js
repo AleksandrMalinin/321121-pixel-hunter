@@ -6,6 +6,7 @@ import SplashScreen from "./splash/splash-screen";
 import {showErrorMessage} from "./util";
 import Loader from "./loader";
 import ManyResultsView from "./views/many-results-view";
+import constants from "./constants";
 
 const changeScreen = (domElement) => {
   const screen = document.querySelector(`.central`);
@@ -14,6 +15,14 @@ const changeScreen = (domElement) => {
 };
 
 let gameData;
+
+const pause = (time) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+};
 
 class Application {
   static async start() {
@@ -26,9 +35,8 @@ class Application {
       gameData = await Loader.loadData();
       greeting.fadeIn();
       splash.fadeOut();
-      setTimeout(() => {
-        greeting.removeElement(splash.element);
-      }, 3000);
+      await pause(constants.PAUSE_TIME);
+      greeting.removeElement(splash.element);
     } catch (e) {
       showErrorMessage(e);
     }
