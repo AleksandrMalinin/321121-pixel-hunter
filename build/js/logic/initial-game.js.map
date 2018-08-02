@@ -1,0 +1,1 @@
+{"version":3,"file":"initial-game.js","sources":["initial-game.js"],"sourcesContent":["const initialGame = {\n  lives: 3,\n  time: 30,\n  win: false,\n  level: 0\n};\n\nexport default initialGame;\n"],"names":["initialGame"],"mappings":";;;AAAA,IAAMA,cAAc;SACX,CADW;QAEZ,EAFY;OAGb,KAHa;SAIX;CAJT;;;;;;;;"}
